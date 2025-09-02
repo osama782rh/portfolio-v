@@ -1,0 +1,216 @@
+/* ============================================
+   skills.css — Arbre de compétences (v2)
+   Compatible avec ton Skills.jsx existant
+============================================ */
+:root{
+  --bg: #0f172a;
+  --panel: rgba(255,255,255,.06);
+  --panel-strong: rgba(255,255,255,.08);
+  --ring: rgba(255,255,255,.16);
+  --text: #e5e7eb;
+  --muted: #a8b1c0;
+  --brand-1: #7c3aed;
+  --brand-2: #22d3ee;
+  --shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+/* ===== Section ===== */
+.skills-section{
+  position: relative;
+  padding: clamp(40px, 6vw, 80px) 24px;
+  background:
+    radial-gradient(1000px 600px at 90% -10%, rgba(124,58,237,.10), transparent 60%),
+    radial-gradient(900px 600px at 6% 110%, rgba(34,211,238,.10), transparent 65%),
+    var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* ===== Mise en page : colonne gauche (titre) + arbre à droite ===== */
+.skills-section .container{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;   /* ← titre à gauche */
+  column-gap: 28px;
+  align-items: start;
+}
+
+.title{
+  grid-column: 1; grid-row: 1;
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  letter-spacing: .2px;
+  background: linear-gradient(90deg,#60a5fa,#a78bfa,#22d3ee);
+  -webkit-background-clip:text; background-clip:text; color: transparent;
+}
+.subtitle{
+  grid-column: 1; grid-row: 2;
+  margin: 0; color: var(--muted);
+}
+
+/* L’arbre occupe toute la colonne de droite (et la hauteur des 2 lignes) */
+.tree{
+  grid-column: 2; grid-row: 1 / span 2;
+  position: relative;
+  max-width: 100%;
+  /* Grille 3×3 : centre = Core, cartes autour */
+  display: grid;
+  grid-template-columns: 1.05fr 360px 1.15fr;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas:
+    "tl   core  tr"
+    "ml   core  mr"
+    "bl   core  br";
+  gap: 28px 26px;
+  align-items: start;
+  min-height: 640px;
+}
+
+/* Axes centraux (discrets) */
+.axis{
+  position: absolute; inset: 0; pointer-events: none; opacity: .18;
+}
+.axis-v::before,
+.axis-h::before{
+  content:""; position:absolute; background: linear-gradient(180deg, rgba(226,232,240,.2), rgba(226,232,240,.05));
+}
+.axis-v::before{ width:1px; height:100%; left:50%; top:0; transform:translateX(-.5px); }
+.axis-h::before{ height:1px; width:100%; top:50%; left:0; transform:translateY(-.5px); }
+
+/* Noyau central */
+.core{
+  grid-area: core;
+  place-self: center;
+  width: 120px; height: 120px; border-radius: 999px;
+  background: radial-gradient(60% 60% at 50% 40%, #60a5fa 0%, #a78bfa 52%, #22d3ee 100%);
+  box-shadow: var(--shadow), 0 0 90px rgba(124,58,237,.35);
+  display:grid; place-items:center; font-weight:800; color:#fff;
+  position: relative;
+}
+.core::after{
+  /* halo doux animé */
+  content:""; position:absolute; inset:-22px;
+  border-radius: inherit; z-index:-1;
+  background: radial-gradient(closest-side, rgba(124,58,237,.22), transparent 70%);
+  animation: pulse 3.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{ opacity:.45; transform: scale(1); }
+  50%{ opacity:.75; transform: scale(1.06); }
+}
+
+/* Neutralise l’ancien positionnement radial */
+.branch{ position: static !important; transform: none !important; inset: auto !important; }
+.branch .arm, .branch .anchor{ display: none !important; }
+
+/* Placement des cartes (ordre issu de ton tableau) */
+.branch:nth-of-type(1){ grid-area: bl; justify-self: start;  } /* DevOps / CI-CD */
+.branch:nth-of-type(2){ grid-area: tl; justify-self: start;  } /* Data / IA & 3D */
+.branch:nth-of-type(3){ grid-area: tr; justify-self: end;    } /* OS & Environnements */
+.branch:nth-of-type(4){ grid-area: br; justify-self: end;    } /* Front-End / Mobile */
+.branch:nth-of-type(5){ grid-area: mr; justify-self: center; } /* Back-End */
+
+/* Carte */
+.group-card{
+  background: linear-gradient(180deg, var(--panel), var(--panel-strong));
+  border: 1px solid var(--ring);
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  max-width: 440px;
+  transform: translateY(6px);
+  opacity: 0;
+  animation: pop 450ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+.branch:nth-of-type(1) .group-card{ animation-delay: .05s; }
+.branch:nth-of-type(2) .group-card{ animation-delay: .10s; }
+.branch:nth-of-type(3) .group-card{ animation-delay: .15s; }
+.branch:nth-of-type(4) .group-card{ animation-delay: .20s; }
+.branch:nth-of-type(5) .group-card{ animation-delay: .25s; }
+@keyframes pop{
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.group-title{ margin: 0 0 10px; font-weight: 750; color:#fff; }
+
+/* Icônes / chips */
+.icons{ display:flex; gap:8px; flex-wrap:wrap; }
+.icon{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  font-size: .88rem;
+}
+.icon img{ width:16px; height:16px; object-fit:contain; border-radius:3px; }
+
+/* ===== Traits animés vers le Core =====
+   - un trait par carte (dashed animé)
+   - glow au survol de la carte
+*/
+.tree{ position:relative; }
+
+@keyframes dash{
+  to{ background-position: 240px 0; }
+}
+/* directions approximées vers le noyau */
+.branch:nth-of-type(1)::after{ transform: rotate(12deg); }   /* DevOps */
+.branch:nth-of-type(2)::after{ transform: rotate(-10deg); }  /* Data */
+.branch:nth-of-type(3)::after{ right: -10px; left:auto; transform: rotate(-6deg); }
+.branch:nth-of-type(4)::after{ right: -10px; left:auto; transform: rotate(10deg); }
+.branch:nth-of-type(5)::after{ transform: rotate(6deg); }
+
+/* Glow sur la ligne quand la carte est hover/focus */
+.group-card:hover + .link,
+.branch:hover::after,
+.branch:focus-within::after{
+  box-shadow: 0 0 0 2px rgba(124,58,237,.35);
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(124,58,237,.55) 0 12px,
+      rgba(124,58,237,.18) 12px 24px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px){
+  .skills-section .container{
+    grid-template-columns: 260px 1fr;
+  }
+  .tree{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "core core"
+      "tl   tr"
+      "mr   br"
+      "bl   bl";
+    min-height: 0;
+  }
+  .core{ margin-bottom: 4px; }
+  .group-card{ max-width: none; }
+  .branch::after{ display:none; } /* traits masqués en medium pour éviter collisions */
+}
+
+@media (max-width: 720px){
+  .skills-section .container{
+    display: block;            /* titre + sous-titre au-dessus en pile */
+  }
+  .title{ margin-bottom: 6px; }
+  .subtitle{ margin-bottom: 16px; }
+  .tree{
+    margin-top: 6px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "core"
+      "tl"
+      "tr"
+      "mr"
+      "br"
+      "bl";
+    gap: 18px;
+  }
+  .core{ width: 100px; height: 100px; }
+}

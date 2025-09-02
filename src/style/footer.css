@@ -1,0 +1,230 @@
+/* ===================== footer.css — footer premium ===================== */
+:root{
+  --bg: #0f172a;
+  --panel: rgba(255,255,255,.06);
+  --panel-strong: rgba(255,255,255,.08);
+  --ring: rgba(255,255,255,.16);
+  --text: #e5e7eb;
+  --muted: #a8b1c0;
+  --brand-1: #7c3aed;
+  --brand-2: #22d3ee;
+  --shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+.pro-footer{
+  position: relative;
+  background:
+    radial-gradient(1000px 600px at 80% -10%, rgba(124,58,237,.14), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(34,211,238,.12), transparent 65%),
+    var(--bg);
+  color: var(--text);
+  padding-top: 64px;
+  overflow: hidden;
+}
+
+.footer-wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 28px;
+}
+
+/* === Bandeau CTA === */
+.footer-cta{
+  margin: 0 auto 28px;
+  padding: 28px 26px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--panel), var(--panel-strong));
+  border: 1px solid var(--ring);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.footer-title{
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  margin: 0;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+.footer-sub{ margin: 2px 0 12px; color: var(--muted); }
+.cta-actions{ display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* === Grille principale === */
+.footer-grid{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr 1.2fr 1.2fr;
+  gap: 26px;
+  margin: 14px 0 26px;
+}
+.col{
+  background: linear-gradient(180deg, var(--panel), var(--panel-strong));
+  border: 1px solid var(--ring);
+  border-radius: 16px;
+  padding: 18px 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.col-title{
+  margin: 0 0 12px;
+  font-weight: 750;
+  color: #fff;
+}
+
+/* À propos */
+.about .about-text{ margin: 0 0 12px; color: var(--muted); }
+.contact-list{
+  list-style: none; padding: 0; margin: 0 0 10px; color: var(--text);
+}
+.contact-list li{ display: flex; gap: 10px; align-items: center; margin: 6px 0; }
+.contact-list .ico{ width: 22px; height: 22px; display: grid; place-items: center; opacity: .8; }
+
+/* Liens rapides */
+.links ul{ list-style: none; padding: 0; margin: 0; }
+.links a{
+  color: var(--text);
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 0;
+  opacity: .9;
+}
+.links a:hover{ color: #fff; }
+
+/* Stack */
+.badges{ display: flex; gap: 8px; flex-wrap: wrap; }
+.badge{
+  font-size: .88rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+/* Newsletter */
+.newsletter .muted{ color: var(--muted); margin: 0 0 10px; }
+.news-form{ display: flex; gap: 10px; flex-wrap: wrap; }
+.news-form input{
+  flex: 1 1 220px;
+  min-width: 220px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--ring);
+  background: rgba(255,255,255,.07);
+  color: var(--text);
+}
+.news-form input::placeholder{ color: #90a0b5; }
+.tiny{ margin: 8px 0 0; color: var(--muted); font-size: .86rem; }
+
+/* Social */
+.social{ display: flex; gap: 10px; margin-top: 10px; }
+.social a{
+  display: inline-grid; place-items: center;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform .15s ease, background .2s ease;
+}
+.social a:hover{ transform: translateY(-2px); background: rgba(255,255,255,.12); }
+.social img{ width: 20px; height: 20px; object-fit: contain; }
+
+/* Bas de page */
+.footer-bottom{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--ring);
+  padding-top: 16px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.legal a{ color: var(--text); text-decoration: none; }
+.sep{ opacity: .45; margin: 0 6px; }
+
+/* Boutons */
+.btn{
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+.btn-primary{
+  color: #fff;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  box-shadow: 0 12px 28px rgba(124,58,237,.25);
+}
+.btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 34px rgba(124,58,237,.3); }
+.btn-ghost{
+  color: var(--text);
+  background: transparent;
+  border-color: var(--ring);
+}
+.btn-ghost:hover{ background: rgba(255,255,255,.07); }
+
+/* Scroll to top */
+.scroll-top{
+  position: fixed; right: 18px; bottom: 18px;
+  width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid var(--ring);
+  background: linear-gradient(180deg, var(--panel), var(--panel-strong));
+  color: #fff; font-size: 20px; line-height: 1;
+  display: grid; place-items: center;
+  box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.scroll-top.visible{ opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Accessibilité utilitaires */
+.sr-only{
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px){
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px){
+  .footer-grid{ grid-template-columns: 1fr; }
+  .footer-bottom{ flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* ====== ADD-ON newsletter (sans changer l’IHM) ====== */
+
+/* Focus propre sur input */
+.news-form input:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34,211,238,.25);
+  border-color: rgba(34,211,238,.55);
+}
+
+/* Désactivation/chargement */
+.news-form input[disabled],
+.news-form button[disabled]{
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+/* Petit spinner quand aria-busy="true" sur le bouton */
+.btn-primary[aria-busy="true"]{
+  position: relative;
+  pointer-events: none;
+}
+.btn-primary[aria-busy="true"]::after{
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.5);
+  border-top-color: #fff;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,50 @@
+:root{
+  --nav-height: 64px;
+  --brand-1:#7c3aed;
+  --brand-2:#22d3ee;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --nav-bg: rgba(15,17,22,.55);
+  --shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+/* header fixe + blur */
+.nav-root{
+  position:fixed; inset:0 0 auto 0; height:var(--nav-height);
+  z-index:50; background:var(--nav-bg); backdrop-filter: blur(14px);
+  transition: transform .45s ease, background .35s ease, box-shadow .35s ease;
+}
+.nav-root.nav-hidden{ transform: translateY(-110%); }
+.nav-root.nav-scrolled{ background: rgba(15,17,22,.8); box-shadow: var(--shadow); }
+
+.container{ max-width:1200px; margin:0 auto; height:100%;
+  padding:0 20px; display:flex; align-items:center; justify-content:space-between; }
+
+.logo-button{ background:transparent; border:none; padding:0; cursor:pointer; }
+
+.nav-links{ list-style:none; display:flex; gap:26px; margin:0; padding:0; align-items:center; }
+.nav-link{ text-decoration:none; color:var(--text); font-weight:700; position:relative; padding:6px 0; }
+.nav-link::after{
+  content:""; position:absolute; left:0; bottom:-4px; height:3px; width:100%;
+  background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); transform:scaleX(0);
+  transform-origin:left; transition: transform .25s ease;
+}
+.nav-link:hover::after{ transform:scaleX(1); }
+
+/* burger */
+.nav-toggle{ display:none; width:44px; height:44px; border:none; background:transparent; cursor:pointer; }
+.nav-toggle span{ display:block; width:26px; height:3px; margin:5px auto; background:var(--text); transition: all .3s ease; }
+.nav-toggle.active span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2){ opacity:0; }
+.nav-toggle.active span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+@media (max-width:768px){
+  .nav-toggle{ display:block; }
+  .nav-links{
+    position:fixed; top:var(--nav-height); left:0; right:0;
+    flex-direction:column; gap:16px; padding:18px; background:rgba(10,12,16,.95);
+    max-height:0; overflow:hidden; opacity:0; transform: translateY(-10px);
+    transition:max-height .45s ease, opacity .3s ease, transform .3s ease;
+  }
+  .nav-links.open{ max-height:80vh; opacity:1; transform: translateY(0); }
+}

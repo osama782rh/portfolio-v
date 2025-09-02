@@ -1,0 +1,126 @@
+/* ===================== header.css ===================== */
+/* Design tokens */
+:root {
+  --hero-h: 92vh;
+  --container-w: 1200px;
+  --pad: 24px;
+  --bg1: #0b1220;
+  --bg2: #0f172a;
+  --brand-1: #7c3aed; /* violet */
+  --brand-2: #22d3ee; /* cyan */
+  --brand-3: #f97316; /* orange */
+  --text-strong: #f8fafc;
+  --text-muted: #cbd5e1;
+  --ring: rgba(255,255,255,.18);
+}
+
+.container { max-width: var(--container-w); margin: 0 auto; padding: 0 var(--pad); }
+
+.hero {
+  position: relative;
+  width: 100vw;         /* 🔥 occupe toute la largeur de l'écran */
+  min-height: 100vh;    /* 🔥 occupe toute la hauteur visible */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--text-strong);
+  background:
+    radial-gradient(1200px 700px at 70% -10%, rgba(124, 58, 237, .25), transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  isolation: isolate;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: var(--container-w);
+  padding: 0 var(--pad);
+  z-index: 1; /* évite que le contenu passe sous les blobs */
+}
+
+/* Background layers */
+.hero-bg { position: absolute; inset: 0; z-index: -1; }
+.bg-gradient {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(34,211,238,.18), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(124,58,237,.22), transparent 45%);
+}
+
+.bg-blur-blob { position: absolute; filter: blur(60px); opacity: .6; mix-blend-mode: screen; }
+.blob-1 {
+  width: 40vmax; height: 40vmax; left: -10vmax; top: -12vmax;
+  background: conic-gradient(from 180deg, rgba(124,58,237,.4), rgba(34,211,238,.25), rgba(249,115,22,.25), rgba(124,58,237,.4));
+  animation: float1 16s ease-in-out infinite;
+}
+.blob-2 {
+  width: 32vmax; height: 32vmax; right: -8vmax; bottom: -10vmax;
+  background: conic-gradient(from 0deg, rgba(34,211,238,.35), rgba(124,58,237,.25), rgba(34,211,238,.35));
+  animation: float2 18s ease-in-out infinite;
+}
+
+.grain {
+  position: absolute; inset: -200%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  opacity: .8; animation: grain 12s steps(10) infinite; pointer-events: none;
+}
+
+@keyframes grain {
+  0% { transform: translate(0,0) } 10% { transform: translate(-5%, -10%) }
+  20% { transform: translate(-15%, 5%) } 30% { transform: translate(7%, -25%) }
+  40% { transform: translate(-5%, 25%) } 50% { transform: translate(-15%, 10%) }
+  60% { transform: translate(15%, 0%) } 70% { transform: translate(0%, 15%) }
+  80% { transform: translate(3%, 35%) } 90% { transform: translate(-10%, 10%) }
+  100% { transform: translate(0,0) }
+}
+@keyframes float1 { 50% { transform: translate3d(2%, 3%, 0) scale(1.03); } }
+@keyframes float2 { 50% { transform: translate3d(-2%, -2%, 0) scale(1.04); } }
+
+/* Typography */
+.title { font-size: clamp(2.6rem, 6.2vw, 5.2rem); line-height: 1.05; margin: 0 0 12px; font-weight: 800; letter-spacing: .2px; }
+.title-line {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--text-strong), #e6e9ef 40%, var(--text-strong));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.highlight { background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.subtitle { margin: 0 0 28px; font-size: clamp(1.05rem, 2.2vw, 1.35rem); color: var(--text-muted); display: flex; align-items: baseline; gap: .45rem; }
+.subtitle-rotating { color: var(--text-strong); font-weight: 700; }
+
+/* petite entrée en fondu pour les mots rotatifs */
+.fade-in { animation: fade .6s ease both; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* CTA */
+.cta-wrap { display: flex; gap: 12px; align-items: center; }
+.btn {
+  appearance: none; border: 1px solid transparent; border-radius: 14px;
+  padding: 12px 18px; font-weight: 700; cursor: pointer;
+  transition: transform .15s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+.btn-primary { background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); color: white; box-shadow: 0 10px 30px rgba(124,58,237,.25); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 38px rgba(124,58,237,.28); }
+.btn-ghost { background: transparent; border-color: var(--ring); color: var(--text-strong); }
+.btn-ghost:hover { background: rgba(255,255,255,.06); }
+
+/* Scroll cue */
+.scroll-cue { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: grid; place-items: center; gap: 8px; cursor: pointer; opacity: .85; }
+.mouse { width: 22px; height: 34px; border-radius: 14px; border: 2px solid rgba(255,255,255,.6); position: relative; }
+.mouse::after {
+  content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 6px; background: rgba(255,255,255,.85); border-radius: 2px; animation: wheel 1.8s ease-in-out infinite;
+}
+@keyframes wheel { 0% { transform: translate(-50%, 0); opacity: 1 } 60% { opacity: 1 } 100% { transform: translate(-50%, 12px); opacity: 0 } }
+.arrow { width: 10px; height: 10px; border-right: 2px solid rgba(255,255,255,.7); border-bottom: 2px solid rgba(255,255,255,.7); transform: rotate(45deg); animation: bounce 1.8s ease-in-out infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0) rotate(45deg) } 50% { transform: translateY(6px) rotate(45deg) } }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cta-wrap { flex-direction: column; width: 100%; align-items: stretch; }
+  .btn { width: 100%; text-align: center; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-blur-blob, .grain, .mouse::after, .arrow, .fade-in { animation: none !important; }
+}

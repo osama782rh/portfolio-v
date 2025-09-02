@@ -1,0 +1,48 @@
+/* === THEME GLOBAL (Dark par défaut) === */
+:root{
+  color-scheme: dark;
+  --bg: #0f172a;
+  --panel: rgba(255,255,255,.06);
+  --panel-strong: rgba(255,255,255,.08);
+  --ring: rgba(255,255,255,.16);
+  --text: #e5e7eb;
+  --muted: #a8b1c0;
+  --brand-1: #7c3aed;
+  --brand-2: #22d3ee;
+  --shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+/* Thème clair (ajusté, on peaufinera après) */
+:root[data-theme="light"]{
+  color-scheme: light;
+  --bg: #f6f7fb;
+  --panel: rgba(0,0,0,.04);
+  --panel-strong: rgba(0,0,0,.06);
+  --ring: rgba(2,6,23,.12);
+  --text: #0f172a;
+  --muted: #475569;
+  --brand-1: #7c3aed;
+  --brand-2: #2563eb;
+  --shadow: 0 30px 80px rgba(2,6,23,.12);
+}
+
+/* Base globale pour appliquer le fond/texte partout */
+html, body { background: var(--bg); color: var(--text); }
+
+/* (optionnel) styles du bouton si tu préfères centraliser ici */
+.theme-toggle{
+  position: fixed; right: 18px; bottom: 74px;
+  width: 46px; height: 46px; border-radius: 999px;
+  border: 1px solid var(--ring);
+  background: linear-gradient(180deg, var(--panel), var(--panel-strong));
+  color: var(--text);
+  display: grid; place-items: center;
+  box-shadow: var(--shadow);
+  cursor: pointer; z-index: 9999;
+  transition: transform .15s, box-shadow .25s, background .25s, opacity .2s;
+}
+.theme-toggle:hover{ transform: translateY(-1px); }
+.theme-toggle .ico{ font-size: 18px; line-height: 1; }
+.theme-toggle.dark{ box-shadow: 0 12px 28px rgba(124,58,237,.25), var(--shadow); }
+.theme-toggle.light{ box-shadow: 0 12px 28px rgba(37,99,235,.20), var(--shadow); }
+.theme-toggle:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(34,211,238,.28), var(--shadow); }

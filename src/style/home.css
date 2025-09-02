@@ -1,0 +1,61 @@
+/* ===================== home.css — spacing propre pour la one-page ===================== */
+/* On n'applique que des espacements + quelques utilitaires, pas de couleurs ni de layout
+   pour éviter tout conflit avec les CSS spécifiques des composants. */
+
+:root {
+  --section-pad-y: 72px;        /* marge verticale standard */
+  --section-pad-y-sm: 56px;     /* sur mobile */
+  --section-gap: 24px;
+}
+
+/* Ajoute un espacement vertical propre à chaque section (sauf le hero/header) */
+#about.section-anchor,
+#skills.section-anchor,
+#projects.section-anchor,
+#certifications.section-anchor,
+#contact.section-anchor {
+  padding-block: var(--section-pad-y);
+}
+
+/* Optionnel : resserrer un peu sur mobile */
+@media (max-width: 768px) {
+  #about.section-anchor,
+  #skills.section-anchor,
+  #projects.section-anchor,
+  #certifications.section-anchor,
+  #contact.section-anchor {
+    padding-block: var(--section-pad-y-sm);
+  }
+}
+
+/* Utilitaires légers — à utiliser si besoin dans tes composants */
+.section-center {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section-head {
+  margin: 0 0 28px;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+  line-height: 1.2;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Petites animations “reveal” douces, désactivées si l’utilisateur préfère réduire les motions */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: reveal .6s ease both;
+}
+@keyframes reveal {
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; opacity: 1; transform: none; }
+}
