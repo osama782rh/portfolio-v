@@ -17,6 +17,16 @@
   scroll-margin-top: 72px;
 }
 
+/* ====== impose l’ordre visuel : head AU-DESSUS, grid en dessous ====== */
+.projects > .container{
+  display: grid;
+  grid-template-areas:
+    "head"
+    "grid";
+  row-gap: 48px; /* espace net entre head (titre+filtres+recherche) et cartes */
+}
+
+/* Titre */
 .title{
   font-size:clamp(1.8rem,4.6vw,2.2rem);
   margin:0; font-weight:800;
@@ -24,11 +34,30 @@
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 
-/* Head / Toolbar */
-.projects-head{ display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
-.toolbar{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+/* ====== Head / Toolbar ====== */
+.projects-head{
+  grid-area: head;
+  display:flex;
+  flex-direction:column;
+  gap:14px;            /* petit espace entre titre et toolbar */
+  margin:0;
+}
 
-.tags{ display:flex; gap:8px; flex-wrap:wrap; }
+/* Toolbar : tags à gauche, recherche tout à droite sur la même ligne */
+.projects .toolbar{
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px); /* tags | search */
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.projects .tags{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;      /* si trop de tags, ils passent à la ligne */
+}
+
 .tag{
   border:1px solid rgba(255,255,255,.15);
   background:rgba(255,255,255,.06);
@@ -39,22 +68,38 @@
 .tag:hover{ transform: translateY(-1px); }
 .tag.active{ background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); border-color: transparent; }
 
+/* Recherche collée à droite */
 .search{
-  min-width:220px; flex:0 1 320px; max-width:360px;
+  width:100%;
+  justify-self:end;      /* colle bien à droite */
+  min-width:260px;
   padding:10px 12px; border-radius:12px;
   background:rgba(255,255,255,.06); color:var(--text);
   border:1px solid rgba(255,255,255,.15);
 }
 
-/* Grid */
-.grid{
-  display:grid; gap:18px;
+/* Responsive : en-dessous de 900px, search passe sous les tags */
+@media (max-width: 900px){
+  .projects .toolbar{
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+  .projects .search{
+    justify-self: stretch; /* pleine largeur */
+  }
+}
+
+/* ====== Grille en dessous ====== */
+.projects .grid{
+  grid-area: grid;
+  display:grid !important;
+  gap:24px;
   grid-template-columns: repeat(3, minmax(0,1fr));
 }
-@media (max-width: 1100px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 680px){ .grid{ grid-template-columns: 1fr; } }
+@media (max-width: 1100px){ .projects .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 680px){  .projects .grid{ grid-template-columns: 1fr; } }
 
-/* Card */
+/* ====== Cards ====== */
 .card{
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   border:1px solid rgba(255,255,255,.10);
@@ -82,7 +127,7 @@
 .btn-primary{ background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); color: white; border-color: transparent; }
 .btn-ghost{ background: transparent; }
 
-/* Modal */
+/* ====== Modal ====== */
 .proj-modal{
   position:fixed; inset:0; z-index:70;
   background:rgba(0,0,0,.55); backdrop-filter: blur(3px);
@@ -100,3 +145,24 @@
 @media (prefers-reduced-motion: reduce){
   .card, .proj-modal{ transition:none !important; animation:none !important; }
 }
+
+/* ===== PROJECTS — LIGHT: contour des cards plus lisible ===== */
+:root[data-theme="light"] .card{
+  border-color: rgba(2,6,23,.22);
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.07),
+    0 12px 28px rgba(2,6,23,.10);
+}
+:root[data-theme="light"] .card:hover{
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.08),
+    0 16px 36px rgba(2,6,23,.14);
+}
+
+/* ===== PROJECTS — LIGHT: input recherche lisible ===== */
+:root[data-theme="light"] .projects .search{
+  background:#ffffff;
+  border:1px solid rgba(2,6,23,.12);
+  color:#0f172a;
+}
+:root[data-theme="light"] .projects .search::placeholder{ color:#6b7280; }

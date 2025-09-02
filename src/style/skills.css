@@ -214,3 +214,43 @@
   }
   .core{ width: 100px; height: 100px; }
 }
+
+/* ===================== SKILLS — LIGHT THEME ONLY ===================== */
+/* Surcharges couleur pour le mode clair (ne touche pas au dark) */
+:root[data-theme="light"] {
+  --text: #0f172a;      /* texte principal lisible */
+  --muted: #475569;     /* texte secondaire */
+  --ring: rgba(2,6,23,.12);
+}
+
+/* Texte de la section en clair */
+:root[data-theme="light"] .skills-section{
+  color: var(--text);
+}
+
+/* Titre de groupe (était blanc) -> foncé */
+:root[data-theme="light"] .group-title{
+  color: #0f172a;
+}
+
+/* Chips / icônes : texte et fond adaptés au clair */
+:root[data-theme="light"] .icon{
+  color: #0f172a;
+  background: rgba(2,6,23,.05);
+  border-color: rgba(2,6,23,.12);
+}
+
+/* Sous-titre côté gauche */
+:root[data-theme="light"] .subtitle{
+  color: var(--muted);
+}
+
+/* Bordure cartes plus nette en light */
+:root[data-theme="light"] .group-card{
+  border-color: rgba(2,6,23,.10);
+}
+
+/* Axes un peu plus discrets en light */
+:root[data-theme="light"] .axis{
+  opacity: .12;
+}

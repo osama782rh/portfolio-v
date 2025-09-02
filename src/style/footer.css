@@ -191,40 +191,105 @@
 }
 
 /* ====== ADD-ON newsletter (sans changer l’IHM) ====== */
-
-/* Focus propre sur input */
 .news-form input:focus-visible{
   outline: none;
   box-shadow: 0 0 0 3px rgba(34,211,238,.25);
   border-color: rgba(34,211,238,.55);
 }
-
-/* Désactivation/chargement */
 .news-form input[disabled],
-.news-form button[disabled]{
-  opacity: .7;
-  cursor: not-allowed;
-}
-
-/* Petit spinner quand aria-busy="true" sur le bouton */
-.btn-primary[aria-busy="true"]{
-  position: relative;
-  pointer-events: none;
-}
+.news-form button[disabled]{ opacity: .7; cursor: not-allowed; }
+.btn-primary[aria-busy="true"]{ position: relative; pointer-events: none; }
 .btn-primary[aria-busy="true"]::after{
   content: "";
   position: absolute;
   right: 12px;
   top: 50%;
-  width: 16px;
-  height: 16px;
-  margin-top: -8px;
+  width: 16px; height: 16px; margin-top: -8px;
   border-radius: 50%;
   border: 2px solid rgba(255,255,255,.5);
   border-top-color: #fff;
   animation: spin .8s linear infinite;
 }
+@keyframes spin{ to { transform: rotate(360deg); } }
 
-@keyframes spin{
-  to { transform: rotate(360deg); }
+/* =========================================================
+   LIGHT THEME — Overrides lisibilité (texte sombre, cartes blanches)
+   ========================================================= */
+:root[data-theme="light"] .pro-footer{
+  color:#0f172a;
+  background:
+    radial-gradient(1400px 900px at 85% -15%, rgba(124,58,237,.10), transparent 60%),
+    radial-gradient(1200px 800px at 12% 115%, rgba(34,211,238,.08), transparent 65%),
+    linear-gradient(180deg,#f8fafc,#f1f5f9 35%,#eef2ff 100%);
+}
+
+/* CTA + colonnes en cartes blanches */
+:root[data-theme="light"] .footer-cta,
+:root[data-theme="light"] .col{
+  background:#ffffff;
+  border:1px solid rgba(2,6,23,.10);     /* slate-900 @10% */
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.04) inset,
+    0 18px 40px rgba(2,6,23,.10);
+}
+:root[data-theme="light"] .footer-title,
+:root[data-theme="light"] .col-title{
+  color:#0f172a;
+}
+:root[data-theme="light"] .footer-sub,
+:root[data-theme="light"] .about .about-text{
+  color:#475569; /* slate-600 */
+}
+
+/* listes/liens */
+:root[data-theme="light"] .contact-list{ color:#0f172a; }
+:root[data-theme="light"] .links a{
+  color:#0f172a;
+  opacity:1;
+}
+:root[data-theme="light"] .links a:hover{ color:#7c3aed; }
+
+/* badges stack */
+:root[data-theme="light"] .badge{
+  background:#f1f5f9;       /* slate-100 */
+  border:1px solid #e2e8f0; /* slate-200 */
+  color:#0f172a;
+}
+
+/* newsletter input */
+:root[data-theme="light"] .news-form input{
+  background:#ffffff;
+  color:#0f172a;
+  border:1px solid #cbd5e1;  /* slate-300 */
+}
+:root[data-theme="light"] .news-form input::placeholder{ color:#94a3b8; }
+
+/* social buttons */
+:root[data-theme="light"] .social a{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+}
+:root[data-theme="light"] .social a:hover{ background:#eef2ff; }
+
+/* bas de page */
+:root[data-theme="light"] .footer-bottom{
+  border-top:1px solid #e2e8f0; /* slate-200 */
+  color:#64748b;               /* slate-500 */
+}
+:root[data-theme="light"] .legal a{ color:#0f172a; }
+
+/* boutons ghost */
+:root[data-theme="light"] .btn-ghost{
+  color:#0f172a;
+  border-color:#e2e8f0;
+  background:transparent;
+}
+:root[data-theme="light"] .btn-ghost:hover{ background:#f1f5f9; }
+
+/* scroll-top light */
+:root[data-theme="light"] .scroll-top{
+  background:#ffffff;
+  border:1px solid #cbd5e1;
+  color:#0f172a;
+  box-shadow: 0 10px 24px rgba(2,6,23,.10);
 }
