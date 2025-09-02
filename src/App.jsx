@@ -8,6 +8,7 @@ import Skills from "./components/skills";
 import Qualities from "./components/qualities";
 import Contact from "./components/contact";
 import Footer from "./components/footer";
+import Experiences from "./components/experiences";
 import { ToastContainer } from "react-toastify";           // ← AJOUT
 import "./App.css";
 
@@ -19,6 +20,7 @@ export default function App() {
       <About />
       <Certifications />
       <Projects />
+      <Experiences />
       <Skills />
       <Qualities />
       <Contact />
