@@ -1,6 +1,8 @@
 /* ============================================
    contact.css — Formulaire Contact premium v4
    (labels AU-DESSUS des champs, pas de chevauchement)
+   — Dark = inchangé
+   — Light = overrides en bas
 ============================================ */
 :root{
   --bg: #0f172a;
@@ -185,7 +187,6 @@
 }
 .btn-ghost:hover{ background: rgba(255,255,255,.07); }
 
-/* Bouton envoyer avec icône */
 .btn-send{ display:inline-flex; align-items:center; gap:10px; }
 .btn-send .btn-ico{ font-size: 1rem; line-height:1; transform: translateY(1px); }
 
@@ -206,4 +207,100 @@
 .sr-only{
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+
+/* =========================================================
+   LIGHT THEME — Overrides lisibilité (texte sombre, champs blancs)
+   ========================================================= */
+:root[data-theme="light"] .contact{
+  color: #0f172a;
+  background:
+    radial-gradient(1400px 900px at 90% -20%, rgba(124,58,237,.10), transparent 60%),
+    radial-gradient(1200px 800px at 8% 110%, rgba(34,211,238,.08), transparent 65%),
+    linear-gradient(180deg, #f8fafc, #f1f5f9 35%, #eef2ff 100%);
+}
+
+:root[data-theme="light"] .contact__head h2{
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .muted{
+  color: #475569; /* slate-600 */
+}
+
+:root[data-theme="light"] .contact__form{
+  background: #ffffff;
+  border: 1px solid rgba(2,6,23,.10);        /* slate-900 at 10% */
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.04) inset,
+    0 18px 40px rgba(2,6,23,.10);
+}
+:root[data-theme="light"] .contact__form::after{
+  opacity: .22; /* halo plus léger */
+}
+
+/* labels */
+:root[data-theme="light"] .field label{
+  color: #334155; /* slate-700 */
+}
+
+/* champs */
+:root[data-theme="light"] .field input,
+:root[data-theme="light"] .field textarea{
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;   /* slate-300 */
+}
+:root[data-theme="light"] .field input::placeholder,
+:root[data-theme="light"] .field textarea::placeholder{
+  color: #94a3b8;              /* slate-400 */
+}
+:root[data-theme="light"] .field input:hover,
+:root[data-theme="light"] .field textarea:hover{
+  background: #f8fafc;         /* slate-50 */
+}
+:root[data-theme="light"] .field input:focus,
+:root[data-theme="light"] .field textarea:focus{
+  border-color: #7c3aed; /* brand, cohérent */
+  box-shadow: 0 0 0 3px rgba(124,58,237,.18);
+  background: #ffffff;
+}
+
+/* autofill light */
+:root[data-theme="light"] .field input:-webkit-autofill,
+:root[data-theme="light"] .field input:-webkit-autofill:hover,
+:root[data-theme="light"] .field input:-webkit-autofill:focus,
+:root[data-theme="light"] .field textarea:-webkit-autofill{
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a;
+}
+
+/* erreurs */
+:root[data-theme="light"] .field .err{
+  color: #dc2626; /* red-600 un peu plus lisible sur blanc */
+}
+
+/* compteur */
+:root[data-theme="light"] .hint{
+  color: #64748b; /* slate-500 */
+}
+
+/* consentement */
+:root[data-theme="light"] .consent{
+  border-color: rgba(2,6,23,.12);
+  background: #f8fafc;
+}
+:root[data-theme="light"] .consent input{
+  accent-color: #7c3aed;
+}
+
+/* boutons */
+:root[data-theme="light"] .btn-ghost{
+  color: #0f172a;
+  border-color: rgba(2,6,23,.15);
+  background: transparent;
+}
+:root[data-theme="light"] .btn-ghost:hover{
+  background: #f1f5f9; /* slate-100 */
 }

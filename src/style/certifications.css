@@ -19,14 +19,31 @@
 
 .title{
   font-size:clamp(1.8rem,4.6vw,2.2rem);
-  margin:10; font-weight:800;
+  margin:10; /* on laisse tel quel globalement */
+  font-weight:800;
   background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 
-.cert-head{
-  display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap;
+/* Titre DANS la section certifications : marge propre */
+.certifications .title{ margin: 0; }
+
+/* >>> Correctif robuste d’espacement : on transforme uniquement
+       la container de cette section en grille verticale avec un gap. */
+.certifications .container{
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-rows: min-content;
+  row-gap: 56px; /* espace net entre (titre+search) et la grille */
 }
+
+/* Entête (titre + barre de recherche) */
+.cert-head{
+  display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  margin: 0;            /* pas de marge pour éviter les surprises */
+  padding: 0;           /* l’espace est géré par row-gap ci-dessus */
+}
+
 .cert-search{
   min-width:240px; flex:0 1 320px;
   padding:10px 12px; border-radius:12px;
@@ -38,10 +55,19 @@
 .cert-grid{
   display:grid; gap:18px;
   grid-template-columns: repeat(4, minmax(0,1fr));
+  margin: 0;            /* pas de marge, l’espace vient du row-gap */
 }
 @media (max-width: 1100px){ .cert-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
-@media (max-width: 780px){ .cert-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 520px){ .cert-grid{ grid-template-columns: 1fr; } }
+@media (max-width: 780px){  .cert-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px){  .cert-grid{ grid-template-columns: 1fr; } }
+
+/* — Ajuste le gap en responsive pour garder de l’air sans trop pousser — */
+@media (max-width: 780px){
+  .certifications .container{ row-gap: 40px; }
+}
+@media (max-width: 520px){
+  .certifications .container{ row-gap: 32px; }
+}
 
 .cert-card{
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
@@ -75,3 +101,24 @@
 .cert-modal-footer{ display:flex; align-items:center; gap:10px; padding:12px; }
 .cert-modal-title{ font-weight:700; color:var(--text); }
 .spacer{ flex:1; }
+
+/* ===== LIGHT ONLY: contour plus foncé autour des certifications ===== */
+:root[data-theme="light"] .cert-card{
+  border-color: rgba(2,6,23,.22);
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.07),
+    0 12px 28px rgba(2,6,23,.10);
+}
+:root[data-theme="light"] .cert-card:hover{
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.08),
+    0 16px 36px rgba(2,6,23,.14);
+}
+
+/* (Option lisibilité input en light) */
+:root[data-theme="light"] .cert-search{
+  background:#ffffff;
+  border:1px solid rgba(2,6,23,.12);
+  color:#0f172a;
+}
+:root[data-theme="light"] .cert-search::placeholder{ color:#6b7280; }

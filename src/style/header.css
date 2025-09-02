@@ -124,3 +124,68 @@
 @media (prefers-reduced-motion: reduce) {
   .bg-blur-blob, .grain, .mouse::after, .arrow, .fade-in { animation: none !important; }
 }
+
+/* =========================================================
+   🟡 MODE LIGHT — fond clair + contraste (dark intact)
+   ========================================================= */
+
+/* Fond clair doux avec légers accents de brand */
+:root[data-theme="light"] .hero{
+  color:#0f172a; /* texte foncé lisible */
+  background:
+    radial-gradient(1200px 640px at 80% -10%, rgba(124,58,237,.14), transparent 60%),
+    radial-gradient(1100px 600px at 12% 112%, rgba(34,211,238,.15), transparent 55%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 45%, #f8fafc 100%);
+}
+
+:root[data-theme="light"] .bg-gradient{
+  background:
+    radial-gradient(circle at 22% 28%, rgba(34,211,238,.15), transparent 42%),
+    radial-gradient(circle at 78% 72%, rgba(124,58,237,.14), transparent 46%);
+}
+
+/* Blobs plus doux sur fond clair */
+:root[data-theme="light"] .bg-blur-blob{
+  filter: blur(70px);
+  opacity:.35;
+  mix-blend-mode:multiply; /* évite les halos clairs */
+}
+
+/* Grain plus subtil en light */
+:root[data-theme="light"] .grain{
+  opacity:.35;
+  mix-blend-mode:multiply;
+}
+
+/* Titres & sous-titres en contraste */
+:root[data-theme="light"] .title-line{
+  background: linear-gradient(90deg, #0f172a, #1f2937 40%, #0f172a);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+:root[data-theme="light"] .subtitle{
+  color:#475569;           /* slate-600 */
+}
+:root[data-theme="light"] .subtitle-rotating{
+  color:#0f172a;
+}
+
+/* Boutons */
+:root[data-theme="light"] .btn-ghost{
+  border-color: rgba(2,6,23,.14);
+  color:#0f172a;
+}
+:root[data-theme="light"] .btn-ghost:hover{
+  background: rgba(2,6,23,.06);
+}
+
+/* Scroll cue (souris + flèche) en foncé */
+:root[data-theme="light"] .mouse{
+  border-color: rgba(2,6,23,.45);
+}
+:root[data-theme="light"] .mouse::after{
+  background: rgba(2,6,23,.75);
+}
+:root[data-theme="light"] .arrow{
+  border-right-color: rgba(2,6,23,.55);
+  border-bottom-color: rgba(2,6,23,.55);
+}
